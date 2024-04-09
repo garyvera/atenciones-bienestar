@@ -15,7 +15,7 @@ class Estudiante(models.Model):
         ("3", "NO BINARIO"),
 ]
     carrera = models.ForeignKey(Carrera, on_delete=models.CASCADE)
-    dni = models.CharField(max_length=10)
+    dni = models.CharField(max_length=10, unique=True)
     apellido_paterno = models.CharField(max_length=30)
     apellido_materno = models.CharField(max_length=30)
     nombre = models.CharField(max_length=100)
@@ -54,7 +54,7 @@ class Atencion(models.Model):
         
     ]
 
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,default=1)
+    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,default="Buscar")
     nivel = models.CharField(max_length=2, choices=NIVEL)
     motivo = models.CharField(max_length=2, choices=DETALLE)
     fecha = models.DateField(blank=True, null=False, auto_now=True, )

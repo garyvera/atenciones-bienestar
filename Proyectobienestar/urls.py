@@ -15,12 +15,12 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path
-from Apps.GestionDocumentalApp.views import indexPageView
+#from Apps.GestionDocumentalApp.views import indexPageView
+from django.conf import settings
+from django.conf.urls.static import static
 
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('', indexPageView.as_view(),name='home'),
-    
-
-]
+   # path('', indexPageView.as_view(),name='home'),
+] + static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
