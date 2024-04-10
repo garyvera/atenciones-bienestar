@@ -27,7 +27,7 @@ SECRET_KEY = 'django-insecure-x#92ivt@kpq4yi83+xov+0x(u#p%5_y+=$zmi8%$+6j9(n#uz#
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['192.168.12.47']
+ALLOWED_HOSTS = ['192.168.12.47', '*', '192.168.100.95']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'Apps.AtencionEstudiantes',
     'Apps.procesos',
     'import_export',
+    'whitenoise.runserver_nostatic'
    
    
     
@@ -51,6 +52,7 @@ INSTALLED_APPS = [
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
+    'whitenoise.middleware.WhiteNoiseMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
     'django.middleware.csrf.CsrfViewMiddleware',
@@ -129,7 +131,7 @@ USE_TZ = False
 
 STATIC_URL = '/static/'
 STATIC_ROOT = BASE_DIR / 'staticfiles'
-#STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 
 
 
