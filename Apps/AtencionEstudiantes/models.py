@@ -63,7 +63,7 @@ class Atencion(models.Model):
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,default="Buscar")
     nivel = models.CharField(max_length=2, choices=NIVEL)
     motivo = models.CharField(max_length=2, choices=DETALLE)
-    encuesta = models.CharField(max_length=2, choices=OPCIONES, null=True)
+    encuesta = models.CharField(max_length=2, choices=OPCIONES, null=True, blank=True, default="___")
     fecha = models.DateField(blank=True, null=False, auto_now=True, )
     
     def __str__(self):
