@@ -23,7 +23,7 @@ class Estudiante(models.Model):
     
     def __str__(self):
         return f"{self.dni} - {self.nombre}"
-  
+
 class Atencion(models.Model):
     DETALLE = [
         ("1", "APOYO SOCIOECONOMICO (BECAS)"),
@@ -54,13 +54,26 @@ class Atencion(models.Model):
         
     ]
 
+    OPCIONES = [
+        ("1", "MUY BUENA"),
+        ("2", "BUENA"),
+        ("3", "REGULAR"),
+    ]
+
     estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,default="Buscar")
     nivel = models.CharField(max_length=2, choices=NIVEL)
     motivo = models.CharField(max_length=2, choices=DETALLE)
+    encuesta = models.CharField(max_length=2, choices=OPCIONES, null=True)
     fecha = models.DateField(blank=True, null=False, auto_now=True, )
     
     def __str__(self):
         return self.motivo
+    
+
+
+
+
+
     
 
 

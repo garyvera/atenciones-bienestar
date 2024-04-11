@@ -48,6 +48,12 @@ class RegistroResource(resources.ModelResource):
         column_name='FECHA',
         attribute='fecha',
     )
+    
+    encuesta = fields.Field(
+        column_name='ATENCIÓN',
+        attribute='get_encuesta_display',
+    )
+
     column_name='ESTUDIANTE',
 
     carrera_name = fields.Field(
@@ -56,8 +62,8 @@ class RegistroResource(resources.ModelResource):
     )
     class Meta:
         model = Atencion
-        fields = ('dni', 'full_title',  'sexo_name', 'nivel_name', 'motivo', 'fecha', 'carrera_name', )
-        export_order = ('dni', 'full_title', 'sexo_name', 'carrera_name','nivel_name', 'motivo', 'fecha', )
+        fields = ('dni', 'full_title',  'sexo_name', 'nivel_name', 'motivo', 'fecha', 'carrera_name', 'encuesta', )
+        export_order = ('dni', 'full_title', 'sexo_name', 'carrera_name','nivel_name', 'motivo', 'fecha', 'encuesta', )
 
     def dehydrate_sexo_name(self, atencion):
         return atencion.estudiante.get_sexo_display()
@@ -80,10 +86,11 @@ class RegistroResource(resources.ModelResource):
    
 class AtencionAdmin(ImportExportModelAdmin):
    resource_class= (RegistroResource)
-   list_display = ['dni', 'ESTUDIANTE', 'carrera', 'sexo','nivel','motivo','fecha',]
+   list_display = ['dni', 'ESTUDIANTE', 'carrera', 'sexo','nivel','motivo','fecha', 'encuesta']
    search_fields = ['estudiante__dni']
    list_filter = ['fecha','motivo', 'estudiante__carrera', ]
    raw_id_fields = ['estudiante']
+ 
    
    def dni(self, obj):
         return obj.estudiante.dni
@@ -100,3 +107,4 @@ class AtencionAdmin(ImportExportModelAdmin):
         return '%s  %s  %s' % (name, ap1, ap2 )
    
 admin.site.register(Atencion, AtencionAdmin)
+
