@@ -1,7 +1,5 @@
 from django.contrib import admin
-
 # Register your models here.
-
 from import_export.admin import ImportExportModelAdmin
 from import_export import resources, fields
 from django.contrib import admin
@@ -11,14 +9,13 @@ from import_export.fields import Field
 from django.utils import formats
 
 class EstudianteAdmin(ImportExportModelAdmin):
-   list_display =  ['dni','apellido_paterno', 'apellido_materno', 'nombre', 'carrera',]
-   search_fields=['dni']
+   list_display =  ['dni','apellido_paterno', 'apellido_materno', 'nombre', 'carrera']
+   search_fields=  ['dni','apellido_paterno','apellido_materno','nombre']
    #readonly_fields = ('nombre','dni')
 admin.site.register(Estudiante, EstudianteAdmin)
 
 class CarreraAdmin(ImportExportModelAdmin):
-    
-   list_display = ['nombre']
+   list_display = ['nombre', ]
 admin.site.register(Carrera, CarreraAdmin)
 
 class RegistroResource(resources.ModelResource):
@@ -54,7 +51,6 @@ class RegistroResource(resources.ModelResource):
         attribute='get_encuesta_display',
     )
 
-    column_name='ESTUDIANTE',
 
     carrera_name = fields.Field(
         column_name='CARRERA',

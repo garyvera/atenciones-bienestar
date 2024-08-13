@@ -22,7 +22,7 @@ class Estudiante(models.Model):
     sexo = models.CharField(max_length=2, choices=SEXO)
     
     def __str__(self):
-        return f"{self.dni} - {self.nombre}"
+        return f" {self.carrera}  {self.dni} {self.nombre} {self.apellido_paterno} {self.apellido_materno}"
 
 class Atencion(models.Model):
     DETALLE = [
@@ -60,7 +60,7 @@ class Atencion(models.Model):
         ("3", "REGULAR"),
     ]
 
-    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE,default="Buscar")
+    estudiante = models.ForeignKey(Estudiante, on_delete=models.CASCADE)
     nivel = models.CharField(max_length=2, choices=NIVEL)
     motivo = models.CharField(max_length=2, choices=DETALLE)
     encuesta = models.CharField(max_length=2, choices=OPCIONES, null=True, blank=True, default="___")
